@@ -175,7 +175,7 @@ const SwapBox = () => {
                         <input type="number" placeholder="20 ICX" onChange={(e) => handleAmountChange(e.target.value)} required className="w-full text-zinc-800 border-[0.5px] transistion-all ease-in-out duration-500 border-gray-300 focus:border-gray-700 rounded-lg px-4 py-3" />
                     </div>
                     <div className="flex flex-col gap-2 items-start">
-                        <label className="text-black">Recipient Addresses (comma&lsquo;separated): 🍰</label>
+                        <label className="text-black">Recipient Addresses, separatedby comma: 🍰</label>
                         <textarea type="number" placeholder="1 - 100 persons max"
                             onChange={(e) => handleBeneficialsChange(e.target.value)} rows="4"
                             required className="w-full text-zinc-800 border-[0.5px] transistion-all ease-in-out duration-500 border-gray-300 focus:border-gray-700 rounded-lg px-4 py-3"></textarea>
