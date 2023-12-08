@@ -187,11 +187,11 @@ const SwapBox = () => {
             >
 
                 {/* Your new component goes here */}
-                <div className="relative bg-white h-auto w-[300px] md:w-auto py-10 px-6 rounded-md flex flex-col gap-6 items-center">
+                <div className="relative bg-white h-auto w-[320px] md:w-auto py-10 px-6 rounded-md flex flex-col gap-6 items-center">
                     <button className="absolute text-white -right-7 -top-1 hover:bg-gray-600 duration-500 rounded-full transition-all ease-in-out p-1 w-6 h-6 flex items-center justify-center" onClick={refreshPage}>x</button>
                     {/* Display the gift link if available */}
                     {giftLink && <div className={`flex items-center gap-2 w-full border-[0.5px] border-gray-300 focus:border-gray-700 rounded-lg px-4 py-3 ${whenClick ? 'border-t-[2px] border-green-600' : 'border-[0.5px]'}`}>
-                        <div className="text-gray-800 transistion-all ease-in-out duration-500">
+                        <div className="text-gray-800 transistion-all ease-in-out duration-500 overflow-hidden">
                             {giftLink}
                         </div>
                         <div className='h-full w-[0.5px] bg-gray-700'></div>
