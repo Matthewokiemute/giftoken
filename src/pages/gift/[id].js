@@ -144,7 +144,7 @@ const GiftPage = () => {
             ) : (
                 <>
 
-                    <div className={`relative bg-white text-black h-auto w-auto py-10 px-6 rounded-md flex flex-col gap-6 items-center ${whenClick ? 'border-t-[4px] border-green-600' : 'border-none'}`}>
+                    <div className={`relative bg-white text-black h-auto w-[300px] md:w-auto py-10 px-6 rounded-md flex flex-col gap-6 items-center ${whenClick ? 'border-t-[4px] border-green-600' : 'border-none'}`}>
                         <p>Account: {formatWalletAddress(fullData?.setter)}</p>
                         {/* Render other details from giftData */}
                         <div className="flex flex-col gap-2 w-full">
