@@ -1,4 +1,4 @@
-// Import necessary modules
+
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import SDK from "weavedb-sdk"
@@ -101,7 +101,7 @@ const GiftPage = () => {
         if (initDB && db && id) {
             getGiftDataById();
         }
-        // ... (other code)
+
     }, [initDB, id, workers]);
 
 
@@ -120,15 +120,6 @@ const GiftPage = () => {
             console.error('Unable to copy to clipboard', error);
         }
     };
-
-    // console.log(router.pathname)
-
-    // if (!giftData) {
-    //     // You can show a loading spinner or some other loading indicator here
-    //     return <div className='flex justify-center items-center'>
-
-    //     </div>;
-    // }
 
     // Render your gift page using the fetched data
     return (
