@@ -169,10 +169,10 @@ const SwapBox = () => {
         }
     };
 
-    
-  function refreshPage() {
-    window.location.reload(false);
-  }
+
+    function refreshPage() {
+        window.location.reload(false);
+    }
 
 
 
@@ -205,10 +205,10 @@ const SwapBox = () => {
                         <input type="number" placeholder="20 ICX" onChange={(e) => handleAmountChange(e.target.value)} required className="w-full text-zinc-800 border-[0.5px] transistion-all ease-in-out duration-500 border-gray-300 focus:border-gray-700 rounded-lg px-4 py-3" />
                     </div>
                     <div className="flex flex-col gap-2 items-start">
-                        <label className="text-black">Recipient Addresses, separatedby comma: 🍰</label>
-                        <textarea type="number" placeholder="1 - 100 persons max"
-                            onChange={(e) => handleBeneficialsChange(e.target.value)} rows="4"
-                            required className="w-full text-zinc-800 border-[0.5px] transistion-all ease-in-out duration-500 border-gray-300 focus:border-gray-700 rounded-lg px-4 py-3"></textarea>
+                        <label className="text-black">No. of Recipient: 🍰</label>
+                        <input type="number" placeholder="1 - 100 persons max"
+                            onChange={(e) => handleBeneficialsChange(e.target.value)}
+                            required className="w-full text-zinc-800 border-[0.5px] transistion-all ease-in-out duration-500 border-gray-300 focus:border-gray-700 rounded-lg px-4 py-3" />
                     </div>
                     <div className="flex flex-col gap-2 items-start">
                         <label value={totalAmount} className="text-black" onChange={(e) => handleTotalAmount(e.target.value)}>Total Amount: 🍰 {totalAmount}</label>
@@ -216,7 +216,7 @@ const SwapBox = () => {
                     <button onClick={handleSubmit} className="disabled:block bg-zinc-800/30 hover:bg-zinc-800 transistion-all ease-in-out duration-500 font-semibold w-full from-zinc-200 cursor-pointer px-5 py-3 rounded-md text-center">{!loading ? 'Create Gift Link' : <LoadingSpinner />}</button>
                 </div>
 
-                <span className="text-xs text-gray-400 underline">As a demo project we&apos;re only currently working with <span className="text-white">BNB faucets tokens.</span></span>
+                <span className="text-xs text-gray-400 underline py-10">As a demo project we&apos;re only currently working with <span className="text-white">ICX faucets tokens.</span></span>
             </motion.div>
         </div>
     )
