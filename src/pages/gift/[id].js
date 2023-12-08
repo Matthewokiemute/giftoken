@@ -5,7 +5,7 @@ import SDK from "weavedb-sdk"
 import LoadingSpinner from '@/components/Spinner';
 import lf from "localforage"
 import { isNil } from "ramda"
-import { FaCopy, FaRegCopy } from "react-icons/fa6";
+import { FaCopy, FaFileArrowUp, FaRegCopy } from "react-icons/fa6";
 
 const contractTxId = "Ng20dHZFTnbgIiwCfFJ1wO8K2x23FiUVuobnQVcMsi0"
 
@@ -19,6 +19,17 @@ const GiftPage = () => {
     const [giftData, setGiftData] = useState(null);
     const [fullData, setFullData] = useState(null);
     const [user, setUser] = useState(null)
+    const [formData, setFormData] = useState({
+        wallet: '',
+    })
+
+    const handleWalletChange = (wallet) => {
+        setFormData((prevData) => ({
+            ...prevData,
+            wallet: wallet,
+        }));
+    };
+
 
 
     const setupWeaveDB = async () => {
@@ -144,12 +155,11 @@ const GiftPage = () => {
                                 </div>
                             </div>
                             <div className={`flex items-center gap-2 w-full border-[0.5px] border-gray-300 focus:border-gray-700 rounded-lg px-4 py-3 ${whenClick ? 'border-t-[2px] border-green-600' : 'border-[0.5px]'}`}>
-                                <div className="text-gray-800 transistion-all ease-in-out duration-500">
-                                    {giftData?.giftLink}
-                                </div>
+                                <input onChange={(e) => handleWalletChange(e.target.value)} placeholder='Enter your Wallet Address' type="text" className="outline:none text-gray-800 placeholder:text-gray-800 transistion-all ease-in-out duration-500" />
+                                
                                 <div className='h-full w-[0.5px] bg-gray-700'></div>
                                 <div className='' onClick={copyToClipboard} style={{ cursor: 'pointer' }}>
-                                    <FaRegCopy className={`w-5 h-5 ${whenClick ? 'text-green-600' : 'text-gray-600'}`} />
+                                    <FaFileArrowUp className={`w-5 h-5 ${whenClick ? 'text-green-600' : 'text-gray-600'}`} />
                                 </div>
                             </div>
                         </div>

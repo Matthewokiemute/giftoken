@@ -9,6 +9,7 @@ import lf from "localforage"
 import { isNil } from "ramda"
 import { ethers } from "ethers"
 import Web3 from "web3";
+import { FaRegCopy } from "react-icons/fa6";
 
 const contractTxId = "Ng20dHZFTnbgIiwCfFJ1wO8K2x23FiUVuobnQVcMsi0"
 const contractAddress = ''
@@ -19,6 +20,7 @@ const SwapBox = () => {
     const [initDB, setInitDb] = useState(false)
     const [workers, setWorkers] = useState(null);
     const [loading, setLoading] = useState(false);
+    const [whenClick, setWhenClick] = useState(false);
     // const [recipientAddresses, setRecipientAddresses] = useState('');
     // const [tokenAmount, setTokenAmount] = useState('');
     // const [wallet, setWallet] = useState(initialState);
@@ -106,7 +108,7 @@ const SwapBox = () => {
             const res = await db.cget("Workers")
             setWorkers(res)
             console.log("getWorkers()", res)
-            
+
         } catch (e) {
             console.error(e)
         }
@@ -119,15 +121,19 @@ const SwapBox = () => {
     };
 
     const handleSubmit = async () => {
+        setLoading(true)
         console.log('Hello...')
         const giftId = generateRandomSixDigitNumber();
         const res = await db.add({ ...formData, giftId: giftId.toString(), giftLink: `https://giftoken.vercel.app/gift/${giftId}` }, "Workers");
         console.log("submitted: ", res)
         if (res) {
-            alert('Data submitted sucessfully')
+            // alert('Data submitted sucessfully')
+            setLoading(false);
             // Retrieve the ID of the newly created record
             // const newId = res?.data && res?.data?.id;
-            router.push(`/gift/${giftId}`);
+            // router.push(`/gift/${giftId}`);
+            setGiftLink(`https://giftoken.vercel.app/gift/${giftId}`)
+            // window.reload();
         } else {
             alert('Error while submitting')
         }
@@ -153,6 +159,21 @@ const SwapBox = () => {
 
     console.log(workers);
 
+    const copyToClipboard = async () => {
+        try {
+            await navigator.clipboard.writeText(giftLink);
+            setWhenClick(!whenClick)
+            // alert('Link copied to clipboard!');
+        } catch (error) {
+            console.error('Unable to copy to clipboard', error);
+        }
+    };
+
+    
+  function refreshPage() {
+    window.location.reload(false);
+  }
+
 
 
     return (
@@ -167,9 +188,18 @@ const SwapBox = () => {
 
                 {/* Your new component goes here */}
                 <div className="relative bg-white h-auto w-auto py-10 px-6 rounded-md flex flex-col gap-6 items-center">
-                    <button className="absolute text-white -right-7 -top-1 hover:bg-gray-600 duration-500 rounded-full transition-all ease-in-out p-1 w-6 h-6 flex items-center justify-center" onClick={handleClose}>x</button>
+                    <button className="absolute text-white -right-7 -top-1 hover:bg-gray-600 duration-500 rounded-full transition-all ease-in-out p-1 w-6 h-6 flex items-center justify-center" onClick={refreshPage}>x</button>
                     {/* Display the gift link if available */}
-                    {giftLink && <p>Share this link: {giftLink}</p>}
+                    {giftLink && <div className={`flex items-center gap-2 w-full border-[0.5px] border-gray-300 focus:border-gray-700 rounded-lg px-4 py-3 ${whenClick ? 'border-t-[2px] border-green-600' : 'border-[0.5px]'}`}>
+                        <div className="text-gray-800 transistion-all ease-in-out duration-500">
+                            {giftLink}
+                        </div>
+                        <div className='h-full w-[0.5px] bg-gray-700'></div>
+                        <div className='' onClick={copyToClipboard} style={{ cursor: 'pointer' }}>
+                            <FaRegCopy className={`w-5 h-5 ${whenClick ? 'text-green-600' : 'text-gray-600'}`} />
+                        </div>
+                    </div>
+                    }
                     <div className="flex flex-col gap-2 items-start w-full">
                         <label className="text-black">Amount of token</label>
                         <input type="number" placeholder="20 ICX" onChange={(e) => handleAmountChange(e.target.value)} required className="w-full text-zinc-800 border-[0.5px] transistion-all ease-in-out duration-500 border-gray-300 focus:border-gray-700 rounded-lg px-4 py-3" />
