@@ -183,7 +183,7 @@ const SwapBox = () => {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 1 }}
                 transition={{ duration: 0.5 }}
-                className="fixed top-0 left-0 w-screen h-[100vh] bg-gray-800 flex flex-col gap-4 items-center justify-center"
+                className="fixed top-0 left-0 w-screen h-[100vh] bg-gray-800 flex flex-col gap-4 text-center items-center justify-center"
             >
 
                 {/* Your new component goes here */}
@@ -216,7 +216,7 @@ const SwapBox = () => {
                     <button onClick={handleSubmit} className="disabled:block bg-zinc-800/30 hover:bg-zinc-800 transistion-all ease-in-out duration-500 font-semibold w-full from-zinc-200 cursor-pointer px-5 py-3 rounded-md text-center">{!loading ? 'Create Gift Link' : <LoadingSpinner />}</button>
                 </div>
 
-                <span className="text-xs text-gray-400 underline py-10">As a demo project we&apos;re only currently working with <span className="text-white">ICX faucets tokens.</span></span>
+                <span className="text-xs mx-auto text-gray-400 underline py-10">As a demo project we&apos;re only currently working with <span className="text-white">ICX faucets tokens.</span></span>
             </motion.div>
         </div>
     )

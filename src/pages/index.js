@@ -179,6 +179,11 @@ export default function Home() {
           <SwapBox isSwapped={isSwapped} />
         )}
       </AnimatePresence>
+      <div className="flex flex-col gap-3 items-center">
+        <h1 className="text-4xl md:text-6xl font-medium">GifToken</h1>
+        <p className="text-center">Are you a Web3/Blockchain community manager, event organizer, buidler, or founder. Giftoken is your tool to gift your community members.</p>
+        <p className="text-sm">Powered by: <span className="text-gray-500">WeaveDB & EtherJs</span></p>
+      </div>
       <div className="">
         <motion.button
           animate={{ scale: 1 }}
