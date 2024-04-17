@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { Inter } from 'next/font/google';
+import { Anton, Gravitas_One, Inter, Roboto_Condensed } from 'next/font/google';
 import { useEffect, useState } from 'react';
 import detectEthereumProvider from '@metamask/detect-provider';
 import { useRouter } from 'next/router';
@@ -7,10 +7,13 @@ import LoadingSpinner from "@/components/Spinner";
 import SwapBox from "@/components/SwapBox";
 import { ethers } from "ethers"
 import lf from "localforage"
-import SDK from "weavedb-sdk" 
+import SDK from "weavedb-sdk"
 import { isNil } from "ramda"
+import { FaRegUser } from "react-icons/fa6";
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Roboto_Condensed({ subsets: ['latin'] });
+// const inter = Anton({ subsets: ['latin'] });
+// const inter = Gravitas_One({ subsets: ['latin'] });
 
 const contractTxId = "Ng20dHZFTnbgIiwCfFJ1wO8K2x23FiUVuobnQVcMsi0"
 
@@ -53,30 +56,30 @@ export default function Home() {
 
   const setupWeaveDB = async () => {
     try {
-        const _db = new SDK({
-            contractTxId
-        });
-        await _db.init();
-        setDb(_db);
-        setInitDb(true);
+      const _db = new SDK({
+        contractTxId
+      });
+      await _db.init();
+      setDb(_db);
+      setInitDb(true);
     } catch (e) {
-        console.error("setupWeaveDB", e);
+      console.error("setupWeaveDB", e);
     }
-};
+  };
 
   const checkUser = async () => {
     const wallet_address = await lf.getItem(`temp_address:current`)
     if (!isNil(wallet_address)) {
-        const identity = await lf.getItem(
-            `temp_address:${contractTxId}:${wallet_address}`
-        )
-        if (!isNil(identity))
-            setUser({
-                wallet: wallet_address,
-                privateKey: identity.privateKey,
-            })
+      const identity = await lf.getItem(
+        `temp_address:${contractTxId}:${wallet_address}`
+      )
+      if (!isNil(identity))
+        setUser({
+          wallet: wallet_address,
+          privateKey: identity.privateKey,
+        })
     }
-}
+  }
 
 
   const login = async () => {
@@ -135,7 +138,7 @@ export default function Home() {
   useEffect(() => {
     checkUser()
     setupWeaveDB();
-}, []);
+  }, []);
 
 
   return (
@@ -143,9 +146,13 @@ export default function Home() {
       className={`flex min-h-screen flex-col items-center justify-between p-24 overflow-hidden ${inter.className}`}
     >
       <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
+        <div className="text-lg font-medium hidden md:inline-block">
+          Giftoken
+        </div>
         {!isNil(user) ? (
-          <button onClick={() => logout()} className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30 hover:bg-zinc-400/30 duration-400 transition-all ease-in-out cursor-pointer">
-            {user.wallet.slice(0, 7)}
+          <button onClick={() => logout()} className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30 hover:bg-zinc-400/30 duration-400 transition-all ease-in-out cursor-pointer gap-2">
+            <FaRegUser className="text-white text-xl" />
+            <span>{user.wallet.slice(0, 12)}</span>
           </button>
         ) : (
           <button onClick={() => login()} className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30 hover:bg-zinc-400/30 duration-400 transition-all ease-in-out cursor-pointer">
@@ -179,8 +186,8 @@ export default function Home() {
           <SwapBox isSwapped={isSwapped} />
         )}
       </AnimatePresence>
-      <div className="flex flex-col gap-3 items-center">
-        <h1 className="text-4xl md:text-6xl font-medium">GifToken</h1>
+      <div className="flex flex-col gap-3 items-center text-center">
+        <h1 className="text-4xl md:text-6xl font-medium">Send/Gift tokens to random multiple addresses</h1>
         <p className="text-center">Are you a Web3/Blockchain community manager, event organizer, buidler, or founder. Giftoken is your tool to gift your community members.</p>
         <p className="text-sm">Powered by: <span className="text-gray-500">WeaveDB & EtherJs</span></p>
       </div>
